@@ -1,10 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text, Button, StyleSheet, SafeAreaView, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import { doc, setDoc } from 'firebase/firestore'; // Import Firestore functions
+import { doc, getDoc } from 'firebase/firestore'; // Import Firestore functions
 import getCurrentUserId from './getCurrentUserId'; // Import getCurrentUserId function
 import { db } from './config'; // Import the db variable
-
 
 const MyProfileScreen = () => {
   const navigation = useNavigation();
@@ -12,24 +11,30 @@ const MyProfileScreen = () => {
   const [height, setHeight] = useState(null);
   const [bmi, setBMI] = useState(null);
 
-  // Function to save profile data to Firestore
-  const saveProfileDataToFirestore = async (weight, height, bmi) => {
+  // Function to fetch profile data from Firestore
+  const fetchProfileData = async () => {
     try {
       const userId = getCurrentUserId(); // Get the current user's ID
       const userRef = doc(db, 'users', userId);
+      const docSnap = await getDoc(userRef);
 
-      // Save profile data to Firestore
-      await setDoc(userRef, {
-        weight: weight,
-        height: height,
-        bmi: bmi
-      }, { merge: true }); // Use merge option to merge new data with existing document
-
-      console.log('Profile data saved to Firestore successfully.');
+      if (docSnap.exists()) {
+        const userData = docSnap.data();
+        setWeight(userData.weight);
+        setHeight(userData.height);
+        setBMI(userData.bmi);
+      } else {
+        console.log('No profile data found for the current user.');
+      }
     } catch (error) {
-      console.error('Error saving profile data to Firestore:', error);
+      console.error('Error fetching profile data from Firestore:', error);
     }
   };
+
+  useEffect(() => {
+    // Fetch profile data when the component mounts
+    fetchProfileData();
+  }, []); // Empty dependency array ensures the effect runs only once after the initial render
 
   const handleEditProfile = () => {
     navigation.navigate('EditProfile', {
@@ -38,7 +43,6 @@ const MyProfileScreen = () => {
         setWeight(newWeight);
         setHeight(newHeight);
         setBMI(newBMI);
-
         // Save updated profile data to Firestore
         saveProfileDataToFirestore(newWeight, newHeight, newBMI);
       },
@@ -52,7 +56,6 @@ const MyProfileScreen = () => {
         setWeight(inputWeight);
         setHeight(inputHeight);
         setBMI(bmi);
-
         // Save profile data to Firestore
         saveProfileDataToFirestore(inputWeight, inputHeight, bmi);
       },
