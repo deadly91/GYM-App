@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, Button, StyleSheet, SafeAreaView, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import { doc, getDoc } from 'firebase/firestore'; // Import Firestore functions
+import { doc, getDoc, setDoc } from 'firebase/firestore'; // Import Firestore functions
 import getCurrentUserId from './getCurrentUserId'; // Import getCurrentUserId function
 import { db } from './config'; // Import the db variable
 
@@ -35,6 +35,25 @@ const MyProfileScreen = () => {
     // Fetch profile data when the component mounts
     fetchProfileData();
   }, []); // Empty dependency array ensures the effect runs only once after the initial render
+
+  // Function to save profile data to Firestore
+  const saveProfileDataToFirestore = async (weight, height, bmi) => {
+    try {
+      const userId = getCurrentUserId(); // Get the current user's ID
+      const userRef = doc(db, 'users', userId);
+
+      // Save profile data to Firestore
+      await setDoc(userRef, {
+        weight: weight,
+        height: height,
+        bmi: bmi
+      }, { merge: true }); // Use merge option to merge new data with existing document
+
+      console.log('Profile data saved to Firestore successfully.');
+    } catch (error) {
+      console.error('Error saving profile data to Firestore:', error);
+    }
+  };
 
   const handleEditProfile = () => {
     navigation.navigate('EditProfile', {
