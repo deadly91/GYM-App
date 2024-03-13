@@ -15,6 +15,9 @@ const MyProfileScreen = () => {
         setWeight(newWeight);
         setHeight(newHeight);
         setBMI(newBMI);
+
+
+        
       },
     });
   };
