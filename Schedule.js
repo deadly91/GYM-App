@@ -101,7 +101,8 @@ const Schedule = () => {
           <Text style={styles.subtitle}>{value.toDateString()}</Text>
           <View style={styles.placeholder}>
             <View style={styles.placeholderInset}>
-              {/* Replace with your content */}
+              
+              {/* Replace with content (events/gym time) */}
             </View>
           </View>
         </View>
@@ -149,7 +150,6 @@ const styles = StyleSheet.create({
     marginTop: 'auto',
     paddingHorizontal: 16,
   },
-  /** Item */
   item: {
     flex: 1,
     height: 50,
@@ -180,7 +180,6 @@ const styles = StyleSheet.create({
     fontWeight: '600',
     color: '#111',
   },
-  /** Placeholder */
   placeholder: {
     flexGrow: 1,
     flexShrink: 1,
@@ -199,7 +198,7 @@ const styles = StyleSheet.create({
     flexShrink: 1,
     flexBasis: 0,
   },
-  /** Button */
+
   btn: {
     flexDirection: 'row',
     alignItems: 'center',
