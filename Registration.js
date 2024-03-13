@@ -1,15 +1,62 @@
-import React, { useState, useEffect } from 'react';
-import { View, Text, FlatList, StyleSheet, SafeAreaView, TouchableOpacity } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
+import React, { useState } from "react";
+import {
+  View,
+  Text,
+  FlatList,
+  StyleSheet,
+  SafeAreaView,
+  TouchableOpacity,
+} from "react-native";
+import { useNavigation } from "@react-navigation/native";
 
 const Registration = () => {
   const navigation = useNavigation();
 
   // Dummy data for classes
   const [classes, setClasses] = useState([
-    { id: 1, name: 'Gym Workout', description: 'Strength training and cardio exercises' },
-    { id: 2, name: 'Pilates', description: 'Low-impact exercises to improve flexibility and strength' },
-    // Add more classes as needed
+    {
+      id: 1,
+      name: "Gym Workout",
+      description: "Strength training and cardio exercises",
+      time: "Everyday 07:00-23:00",
+    },
+    {
+      id: 2,
+      name: "Pilates",
+      description: "Low-impact exercises to improve flexibility and strength",
+      time: "Everyday 08:00-10:00",
+    },
+    {
+      id: 3,
+      name: "Crossfit",
+      description:
+        "CrossFit is a strength and conditioning workout that is made up of functional movement performed at a high intensity level.",
+      time: "Monday 18:00-20:00",
+    },
+    {
+      id: 4,
+      name: "HIIT",
+      description:
+        "High-intensity interval training, better known as HIIT, consists of short bursts of intense work that typically last between 15 seconds to 4 minutes.",
+    },
+    {
+      id: 5,
+      name: "Yoga",
+      description:
+        "Yoga is a holistic practice that combines physical postures, breathing techniques, and meditation to promote relaxation, flexibility, and overall well-being.",
+    },
+    {
+      id: 6,
+      name: "Zumba",
+      description:
+        "Zumba is an interval workout. The classes move between high- and low-intensity dance moves designed to get your heart rate up and boost cardio endurance.",
+    },
+    {
+      id: 7,
+      name: "Spinning",
+      description:
+        "Spinning is a high-intensity indoor cycling workout that typically involves riding a stationary bike to music, led by an instructor.",
+    },
   ]);
 
   const renderItem = ({ item }) => (
@@ -22,9 +69,7 @@ const Registration = () => {
   );
 
   const handleClassSelection = (selectedClass) => {
-    // Navigate to the class details screen
-    // You can pass the selected class as a parameter if needed
-    navigation.navigate('ClassDetails', { class: selectedClass });
+    navigation.navigate("ClassDetails", { selectedClass });
   };
 
   const handleGoBack = () => {
@@ -52,46 +97,46 @@ const Registration = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#f0f0f0',
+    backgroundColor: "#f0f0f0",
     padding: 16,
   },
   title: {
     fontSize: 24,
-    fontWeight: 'bold',
+    fontWeight: "bold",
     marginBottom: 16,
-    textAlign: 'center',
+    textAlign: "center",
   },
   listContainer: {
     flexGrow: 1,
   },
   itemContainer: {
-    backgroundColor: '#fff',
+    backgroundColor: "#fff",
     borderRadius: 8,
     padding: 16,
     marginBottom: 12,
   },
   itemName: {
     fontSize: 18,
-    fontWeight: 'bold',
+    fontWeight: "bold",
     marginBottom: 8,
   },
   itemDescription: {
     fontSize: 16,
   },
   btn: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
     borderRadius: 8,
     paddingVertical: 10,
     paddingHorizontal: 20,
-    backgroundColor: '#007aff',
+    backgroundColor: "#007aff",
     marginTop: 16,
   },
   btnText: {
     fontSize: 18,
-    fontWeight: '600',
-    color: '#fff',
+    fontWeight: "600",
+    color: "#fff",
   },
 });
 
