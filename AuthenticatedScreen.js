@@ -13,6 +13,11 @@ const AuthenticatedScreen = ({ user, handleAuthentication }) => {
     navigation.navigate('Schedule');
   };
 
+  const navigateToWorkout = () => {
+    // Navigate to Workout screen
+    navigation.navigate('Workout');
+  };
+
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.headerContainer}>
@@ -24,8 +29,9 @@ const AuthenticatedScreen = ({ user, handleAuthentication }) => {
         </View>
       </View>
       <View style={styles.contentContainer}>
-        <View style={styles.scheduleButtonContainer}>
-          <Button title="Schedule" onPress={navigateToSchedule} color="#27ae60" />
+        <View style={styles.buttonContainer}>
+          <Button title="Schedule" onPress={navigateToSchedule} color="#9b59b6" />
+          <Button title="Workout Examples" onPress={navigateToWorkout} color="#9b59b6" />
         </View>
       </View>
       <View style={styles.bottomContainer}>
@@ -61,7 +67,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  scheduleButtonContainer: {
+  buttonContainer: {
+    flexDirection: 'row',
     marginBottom: 16,
   },
   bottomContainer: {

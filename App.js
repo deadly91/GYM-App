@@ -7,9 +7,10 @@ import AuthenticatedScreen from './AuthenticatedScreen';
 import MyProfileScreen from './MyProfileScreen';
 import InputProfile from './InputProfile';
 import EditProfile from './EditProfile';
-import Schedule from './Schedule'; // Import the Schedule screen
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut } from '@firebase/auth';
+import Schedule from './Schedule';
+import Workout from './Workout';
 import firebaseConfig from './config';
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut } from '@firebase/auth';
 
 const Stack = createStackNavigator();
 
@@ -88,6 +89,7 @@ const App = () => {
         <Stack.Screen name="InputProfile" component={InputProfile} />
         <Stack.Screen name="EditProfile" component={EditProfile} />
         <Stack.Screen name="Schedule" component={Schedule} />
+        <Stack.Screen name="Workout" component={Workout} />
       </Stack.Navigator>
     </NavigationContainer>
   );
