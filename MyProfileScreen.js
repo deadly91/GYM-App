@@ -91,15 +91,15 @@ const MyProfileScreen = () => {
         <Text style={styles.title}>My Profile</Text>
         {weight !== null && height !== null && bmi !== null ? (
           <View style={styles.profileInfoContainer}>
-            <Text>Weight: {weight} kg</Text>
-            <Text>Height: {height} cm</Text>
-            <Text>BMI: {bmi}</Text>
-            <Button title="Edit Profile" onPress={handleEditProfile} color="#3498db" />
+            <Text style={styles.infoText}>Weight: {weight} kg</Text>
+            <Text style={styles.infoText}>Height: {height} cm</Text>
+            <Text style={styles.infoText}>BMI: {bmi}</Text>
+            <Button title="Edit Profile" onPress={handleEditProfile} color="#007aff" />
           </View>
         ) : (
           <View style={styles.inputProfileContainer}>
-            <Text>No profile information found. Input your data:</Text>
-            <Button title="Input Profile" onPress={handleInputProfile} color="#3498db" />
+            <Text style={styles.infoText}>No profile information found. Input your data:</Text>
+            <Button title="Input Profile" onPress={handleInputProfile} color="#007aff" />
           </View>
         )}
       </View>
@@ -138,6 +138,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginTop: 20,
   },
+  infoText: {
+    fontSize: 18,
+    marginBottom: 10,
+  },
   footer: {
     justifyContent: 'flex-end',
     marginBottom: 16,
@@ -150,13 +154,10 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     paddingVertical: 10,
     paddingHorizontal: 20,
-    borderWidth: 1,
     backgroundColor: '#007aff',
-    borderColor: '#007aff',
   },
   btnText: {
     fontSize: 18,
-    lineHeight: 26,
     fontWeight: '600',
     color: '#fff',
   },
