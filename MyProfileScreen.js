@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, Button, StyleSheet, SafeAreaView } from 'react-native';
+import { View, Text, Button, StyleSheet, SafeAreaView, TouchableOpacity} from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
 const MyProfileScreen = () => {
@@ -11,10 +11,7 @@ const MyProfileScreen = () => {
   const handleEditProfile = () => {
     navigation.navigate('EditProfile', {
       onProfileEdit: (newWeight, newHeight) => {
-        // Calculate BMI
         const newBMI = (newWeight / (newHeight ** 2)).toFixed(2);
-
-        // Update state with edited profile information
         setWeight(newWeight);
         setHeight(newHeight);
         setBMI(newBMI);
@@ -25,10 +22,7 @@ const MyProfileScreen = () => {
   const handleInputProfile = () => {
     navigation.navigate('InputProfile', {
       onProfileInput: (inputWeight, inputHeight) => {
-        // Calculate BMI
         const bmi = (inputWeight / (inputHeight ** 2)).toFixed(2);
-
-        // Update state with weight, height, and BMI
         setWeight(inputWeight);
         setHeight(inputHeight);
         setBMI(bmi);
@@ -36,12 +30,15 @@ const MyProfileScreen = () => {
     });
   };
 
+  const handleReturn = () => {
+    navigation.goBack();
+  };
+
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.contentContainer}>
         <Text style={styles.title}>My Profile</Text>
         {weight !== null && height !== null && bmi !== null ? (
-          // Display existing profile information
           <View style={styles.profileInfoContainer}>
             <Text>Weight: {weight} kg</Text>
             <Text>Height: {height} cm</Text>
@@ -49,15 +46,18 @@ const MyProfileScreen = () => {
             <Button title="Edit Profile" onPress={handleEditProfile} color="#3498db" />
           </View>
         ) : (
-          // Display option to input profile information
           <View style={styles.inputProfileContainer}>
             <Text>No profile information found. Input your data:</Text>
             <Button title="Input Profile" onPress={handleInputProfile} color="#3498db" />
           </View>
         )}
       </View>
-      <View style={styles.bottomContainer}>
-        <Button title="Go Back" onPress={() => navigation.goBack()} color="#3498db" />
+      <View style={styles.footer}>
+        <TouchableOpacity onPress={handleReturn}>
+          <View style={styles.btn}>
+            <Text style={styles.btnText}>GO BACK</Text>
+          </View>
+        </TouchableOpacity>
       </View>
     </SafeAreaView>
   );
@@ -70,7 +70,7 @@ const styles = StyleSheet.create({
   },
   contentContainer: {
     flex: 1,
-    justifyContent: 'flex-start', // Align content at the top
+    justifyContent: 'flex-start',
     alignItems: 'center',
     padding: 16,
   },
@@ -87,10 +87,27 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginTop: 20,
   },
-  bottomContainer: {
+  footer: {
     justifyContent: 'flex-end',
     marginBottom: 16,
     marginHorizontal: 16,
+  },
+  btn: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius: 8,
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    borderWidth: 1,
+    backgroundColor: '#007aff',
+    borderColor: '#007aff',
+  },
+  btnText: {
+    fontSize: 18,
+    lineHeight: 26,
+    fontWeight: '600',
+    color: '#fff',
   },
 });
 

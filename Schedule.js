@@ -109,7 +109,7 @@ const Schedule = () => {
         <View style={styles.footer}>
           <TouchableOpacity onPress={handleReturn}>
             <View style={styles.btn}>
-              <Text style={styles.btnText}>Go Back</Text>
+              <Text style={styles.btnText}>GO BACK</Text>
             </View>
           </TouchableOpacity>
         </View>
