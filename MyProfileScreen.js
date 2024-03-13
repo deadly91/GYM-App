@@ -1,12 +1,35 @@
 import React, { useState } from 'react';
-import { View, Text, Button, StyleSheet, SafeAreaView, TouchableOpacity} from 'react-native';
+import { View, Text, Button, StyleSheet, SafeAreaView, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import { doc, setDoc } from 'firebase/firestore'; // Import Firestore functions
+import getCurrentUserId from './getCurrentUserId'; // Import getCurrentUserId function
+import { db } from './config'; // Import the db variable
+
 
 const MyProfileScreen = () => {
   const navigation = useNavigation();
   const [weight, setWeight] = useState(null);
   const [height, setHeight] = useState(null);
   const [bmi, setBMI] = useState(null);
+
+  // Function to save profile data to Firestore
+  const saveProfileDataToFirestore = async (weight, height, bmi) => {
+    try {
+      const userId = getCurrentUserId(); // Get the current user's ID
+      const userRef = doc(db, 'users', userId);
+
+      // Save profile data to Firestore
+      await setDoc(userRef, {
+        weight: weight,
+        height: height,
+        bmi: bmi
+      }, { merge: true }); // Use merge option to merge new data with existing document
+
+      console.log('Profile data saved to Firestore successfully.');
+    } catch (error) {
+      console.error('Error saving profile data to Firestore:', error);
+    }
+  };
 
   const handleEditProfile = () => {
     navigation.navigate('EditProfile', {
@@ -16,8 +39,8 @@ const MyProfileScreen = () => {
         setHeight(newHeight);
         setBMI(newBMI);
 
-
-        
+        // Save updated profile data to Firestore
+        saveProfileDataToFirestore(newWeight, newHeight, newBMI);
       },
     });
   };
@@ -29,6 +52,9 @@ const MyProfileScreen = () => {
         setWeight(inputWeight);
         setHeight(inputHeight);
         setBMI(bmi);
+
+        // Save profile data to Firestore
+        saveProfileDataToFirestore(inputWeight, inputHeight, bmi);
       },
     });
   };
