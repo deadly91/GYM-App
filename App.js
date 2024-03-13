@@ -9,6 +9,7 @@ import InputProfile from './InputProfile';
 import EditProfile from './EditProfile';
 import Schedule from './Schedule';
 import Workout from './Workout';
+import Registration from './Registration';
 import firebaseConfig from './config';
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut } from '@firebase/auth';
 
@@ -90,6 +91,7 @@ const App = () => {
         <Stack.Screen name="EditProfile" component={EditProfile} />
         <Stack.Screen name="Schedule" component={Schedule} />
         <Stack.Screen name="Workout" component={Workout} />
+        <Stack.Screen name="Registration" component={Registration} />
       </Stack.Navigator>
     </NavigationContainer>
   );
