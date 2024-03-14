@@ -28,7 +28,6 @@ const Schedule = () => {
 
   const weeks = React.useMemo(() => {
     const start = moment().add(week, "weeks").startOf("week");
-
     return [-1, 0, 1].map((adj) => {
       return Array.from({ length: 7 }).map((_, index) => {
         const date = moment(start).add(adj, "week").add(index, "day");
@@ -69,6 +68,18 @@ const Schedule = () => {
     navigation.goBack();
   };
 
+
+  function getFirstWord(sentence) {
+    // Split the sentence into an array of words
+    const words = sentence.split(' ');
+    
+    // Return the first word (element at index 0)
+    return words[0];
+  }
+  
+
+
+
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <View style={styles.container}>
@@ -102,7 +113,9 @@ const Schedule = () => {
               >
                 {dates.map((item, dateIndex) => {
                   const isActive =
-                    value.toDateString() === item.date.toDateString();
+                  value.toDateString() === item.date.toDateString(); 
+                 getFirstWord(value.toDateString());
+                    
                   return (
                     <TouchableWithoutFeedback
                       key={dateIndex}
@@ -145,8 +158,22 @@ const Schedule = () => {
         <View style={{ flex: 1, paddingHorizontal: 16, paddingVertical: 24 }}>
           <Text style={styles.subtitle}>{value.toDateString()}</Text>
           <View style={styles.placeholder}>
+            
             <View style={styles.placeholderInset}>
-              <Text> contents </Text>
+            
+            {day == getFirstWord(value.toDateString()) &&   //if the current day (for example Tue), display it during Tue in calendar 
+            
+              <View><Text style={styles.placeholderText}>{name} {time} </Text></View>
+                 
+            }
+            
+            { day === 'Everyday' &&  //if the current event in schedule is everyday, display it the entire week
+            
+          <View><Text style={styles.placeholderText}>{name} {time} </Text></View>
+
+           }
+
+
             </View>
           </View>
         </View>
@@ -233,7 +260,7 @@ const styles = StyleSheet.create({
     padding: 0,
     backgroundColor: "transparent",
   },
-  placeholderInset: {
+  placeholderInset: { //Text displayed inside the Calendar (Classes)
     borderWidth: 4,
     borderColor: "#e5e7eb",
     borderStyle: "dashed",
@@ -241,7 +268,18 @@ const styles = StyleSheet.create({
     flexGrow: 1,
     flexShrink: 1,
     flexBasis: 0,
+    padding: 20, // Adjust padding as needed
+    alignItems: "center",
+    justifyContent: "center",
   },
+
+  placeholderText: { //Increase the text inside the Calendar (Classes)
+    fontSize: 20, // Increase the font size
+    fontWeight: "bold", // Use a bold font weight
+    color: "#333", // Darken the text color for better visibility
+    textAlign: "center",
+  },
+
 
   btn: {
     flexDirection: "row",
