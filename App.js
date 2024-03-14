@@ -62,14 +62,14 @@ const App = () => {
         }
       }
     } catch (error) {
-      if (error.code === "auth/email-already-in-use") {
+      if (error.code === "auth/email-already-in-use") { //database
         Alert.alert(
           "Error",
           "Email is already in use. Please use a different email."
         );
-      } else if (error.code === "auth/invalid-credential") {
+      } else if (error.code === "auth/invalid-credential") { //database error
         Alert.alert("Error", "Invalid credential.");
-      } else if (error.code === "auth/weak-password") {
+      } else if (error.code === "auth/weak-password") { //database error
         Alert.alert("Error", "Password should be at least 6 characters.");
       } else {
         Alert.alert("Error", "Authentication error. Please try again.");
