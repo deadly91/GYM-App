@@ -7,19 +7,39 @@ import {
   TouchableOpacity,
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
+import { doc, getDoc, setDoc } from "firebase/firestore"; // Import Firestore functions
+import getCurrentUserId from "./getCurrentUserId"; // Import getCurrentUserId function
+import { db } from "./config"; // Import the db variable
 
 const ClassDetails = ({ route }) => {
   const navigation = useNavigation();
   const { selectedClass } = route.params;
 
+  const saveClassDataToFirestore = async () => {
+    try {
+      const userId = getCurrentUserId(); // Get the current user's ID
+      const userRef = doc(db, "users", userId);
+
+      // Save profile data to Firestore
+      await setDoc(
+        userRef,
+        {
+          name: selectedClass.name,
+          time: selectedClass.time,
+          day: selectedClass.day,
+        },
+        { merge: true }
+      ); // Use merge option to merge new data with existing document
+
+      console.log("Class data saved to Firestore successfully.");
+      navigation.goBack();
+    } catch (error) {
+      console.error("Error saving class data to Firestore:", error);
+    }
+  };
+
   const handleApply = () => {
-    // Add the selected class to the schedule
-    // Implement this according to your state management solution
-    // For example:
-    // dispatch(addToSchedule(selectedClass));
-    // or
-    // setSchedule([...schedule, selectedClass]);
-    // Navigate back to the Registration screen
+    saveClassDataToFirestore();
     navigation.goBack();
   };
 
@@ -31,6 +51,8 @@ const ClassDetails = ({ route }) => {
     <SafeAreaView style={styles.container}>
       <View style={styles.detailsContainer}>
         <Text style={styles.title}>{selectedClass.name}</Text>
+        <Text style={styles.time}>{selectedClass.day}</Text>
+        <Text style={styles.day}>{selectedClass.time}</Text>
         <Text style={styles.description}>{selectedClass.description}</Text>
         <TouchableOpacity onPress={handleApply}>
           <View style={styles.applyBtn}>
@@ -63,6 +85,10 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     marginBottom: 16,
   },
+  time: {
+    fontSize: 20,
+    marginBottom: 16,
+  },
   description: {
     fontSize: 18,
     marginBottom: 16,
@@ -85,7 +111,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 24,
     borderRadius: 8,
     marginTop: 16,
-    alignItems: "center", // Align items in the center horizontally
+    alignItems: "center",
   },
   btnText: {
     fontSize: 18,
