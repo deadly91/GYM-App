@@ -1,3 +1,4 @@
+import React, { useState, useRef, useEffect } from "react";
 import {
   StyleSheet,
   SafeAreaView,
@@ -8,22 +9,22 @@ import {
   TouchableOpacity,
 } from "react-native";
 import moment from "moment";
-import Swiper from "react-native-swiper/src"; // Importing Swiper from source
-import { useNavigation } from "@react-navigation/native"; // Import useNavigation hook
-import { doc, getDoc, setDoc } from "firebase/firestore"; // Import Firestore functions
-import getCurrentUserId from "./getCurrentUserId"; // Import getCurrentUserId function
-import { db } from "./config"; // Import the db variable
-import React, { useState, useRef, useEffect } from "react";
+import Swiper from "react-native-swiper/src";
+import { useNavigation } from "@react-navigation/native";
+import { doc, getDoc } from "firebase/firestore";
+import getCurrentUserId from "./getCurrentUserId";
+import { db } from "./config";
+
 const { width } = Dimensions.get("window");
 
 const Schedule = () => {
-  const navigation = useNavigation(); // Get navigation object using useNavigation hook
+  const navigation = useNavigation();
   const swiper = useRef();
   const [value, setValue] = useState(new Date());
   const [week, setWeek] = useState(0);
-  const [day, setDay] = useState(0);
-  const [time, setTime] = useState(0);
-  const [name, setName] = useState(0);
+  const [day, setDay] = useState("");
+  const [time, setTime] = useState("");
+  const [name, setName] = useState("");
 
   const weeks = React.useMemo(() => {
     const start = moment().add(week, "weeks").startOf("week");
@@ -48,10 +49,10 @@ const Schedule = () => {
 
       if (docSnap.exists()) {
         const fetchedUserData = docSnap.data();
-        const { day, name, time } = fetchedUserData; // Destructure only the required fields
-        setDay(day); // Set day state variable
-        setName(name); // Set name state variable
-        setTime(time); // Set time state variable
+        const { day, name, time } = fetchedUserData;
+        setDay(day);
+        setName(name);
+        setTime(time);
       } else {
         console.log("No profile data found for the current user.");
       }
@@ -65,7 +66,7 @@ const Schedule = () => {
   }, []);
 
   const handleReturn = () => {
-    navigation.goBack(); // Navigate back using the navigation object
+    navigation.goBack();
   };
 
   return (
@@ -143,7 +144,11 @@ const Schedule = () => {
 
         <View style={{ flex: 1, paddingHorizontal: 16, paddingVertical: 24 }}>
           <Text style={styles.subtitle}>{value.toDateString()}</Text>
-          <View style={styles.placeholder}></View>
+          <View style={styles.placeholder}>
+            <View style={styles.placeholderInset}>
+              <Text> contents </Text>
+            </View>
+          </View>
         </View>
 
         <View style={styles.footer}>
