@@ -69,7 +69,7 @@ const Schedule = () => {
   };
 
 
-  function getFirstWord(sentence) {
+  function getFirstWord(sentence) { //Function that will simply put a string of "Day ,Month, Numeric day, Numeric year" in array and restore first word of array (the day for example: Sun)
     // Split the sentence into an array of words
     const words = sentence.split(' ');
     
