@@ -38,7 +38,7 @@ const AuthenticatedScreen = ({ user, handleAuthentication }) => {
       <View style={styles.contentContainer}>
         <View style={styles.buttonContainer}>
           <TouchableOpacity onPress={navigateToSchedule} style={[styles.button, { backgroundColor: '#9b59b6' }]}>
-            <Text style={styles.buttonText}>Schedule</Text>
+            <Text style={styles.buttonText}>Calendar</Text>
           </TouchableOpacity>
           <TouchableOpacity onPress={navigateToWorkout} style={[styles.button, { backgroundColor: '#9b59b6' }]}>
             <Text style={styles.buttonText}>Workout Examples</Text>
