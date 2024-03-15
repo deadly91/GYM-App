@@ -15,6 +15,7 @@ import Nutritionmenus from "./Nutritionmenus";
 import OneMonth from "./menus/OneMonth";
 import ThreeMonth from "./menus/ThreeMonth";
 import FiveMonth from "./menus/FiveMonth";
+import AppShop from "./AppShop";
 import firebaseConfig from "./config";
 import {
   getAuth,
@@ -120,6 +121,7 @@ const App = () => {
         <Stack.Screen name="OneMonth" component={OneMonth} />
         <Stack.Screen name="ThreeMonth" component={ThreeMonth} />
         <Stack.Screen name="FiveMonth" component={FiveMonth} />
+        <Stack.Screen name="AppShop" component={AppShop} />
       </Stack.Navigator>
     </NavigationContainer>
   );

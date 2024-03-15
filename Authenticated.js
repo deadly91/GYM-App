@@ -13,28 +13,27 @@ const Authenticated = ({ user, handleAuthentication }) => {
   const navigation = useNavigation();
 
   const navigateToProfile = () => {
-    // Navigate to My Profile screen
     navigation.navigate("MyProfile");
   };
 
   const navigateToSchedule = () => {
-    // Navigate to Schedule screen
     navigation.navigate("Schedule");
   };
 
   const navigateToWorkout = () => {
-    // Navigate to Workout screen
     navigation.navigate("Workout");
   };
 
   const navigateToRegistration = () => {
-    // Navigate to Register screen
     navigation.navigate("Registration");
   };
 
   const navigateToNutritionmenus = () => {
-    // Navigate to Nutrition menus
     navigation.navigate("Nutritionmenus");
+  };
+
+  const navigateToAppShop = () => {
+    navigation.navigate("AppShop");
   };
 
   return (
@@ -80,6 +79,14 @@ const Authenticated = ({ user, handleAuthentication }) => {
             <Text style={styles.buttonText}>Nutrition menus</Text>
           </TouchableOpacity>
         </View>
+        <View style={styles.buttonContainer}>
+          <TouchableOpacity
+            onPress={navigateToAppShop}
+            style={[styles.button, { backgroundColor: "#9b59b6" }]}
+          >
+            <Text style={styles.buttonText}>App Shop</Text>
+          </TouchableOpacity>
+        </View>
       </View>
       <View style={styles.bottomContainer}>
         <Button
@@ -111,7 +118,7 @@ const styles = StyleSheet.create({
     textAlign: "left",
   },
   profileButtonContainer: {
-    marginLeft: 8, // Add some spacing between email and button
+    marginLeft: 8,
   },
   contentContainer: {
     flex: 1,
