@@ -39,6 +39,7 @@ const Nutritionmenus = () => {
     <SafeAreaView style={styles.container}>
       <View style={styles.header}>
         <Text style={styles.title}>Nutrition Menus</Text>
+        <Text style={styles.kosherText}>All the menus are kosher friendly</Text>
       </View>
       <View style={styles.content}>
         <TouchableOpacity onPress={() => handleMenuSelection("1 month menu")}>
@@ -83,6 +84,12 @@ const styles = StyleSheet.create({
     marginBottom: 16,
     textAlign: "center",
     fontWeight: "bold",
+  },
+  kosherText: {
+    fontSize: 20,
+    color: "#777",
+    fontStyle: "italic",
+    marginBottom: 8,
   },
   content: {
     alignItems: "center", // Center buttons horizontally
