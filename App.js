@@ -3,8 +3,8 @@ import { View, StyleSheet, Alert } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import AuthForm from "./AuthForm";
-import AuthenticatedScreen from "./AuthenticatedScreen";
-import MyProfileScreen from "./MyProfileScreen";
+import Authenticated from "./Authenticated";
+import MyProfile from "./MyProfile";
 import InputProfile from "./InputProfile";
 import EditProfile from "./EditProfile";
 import Schedule from "./Schedule";
@@ -91,7 +91,7 @@ const App = () => {
           {(props) => (
             <View style={styles.container}>
               {user ? (
-                <AuthenticatedScreen
+                <Authenticated
                   user={user}
                   handleAuthentication={handleAuthentication}
                 />
@@ -109,7 +109,7 @@ const App = () => {
             </View>
           )}
         </Stack.Screen>
-        <Stack.Screen name="MyProfile" component={MyProfileScreen} />
+        <Stack.Screen name="MyProfile" component={MyProfile} />
         <Stack.Screen name="InputProfile" component={InputProfile} />
         <Stack.Screen name="EditProfile" component={EditProfile} />
         <Stack.Screen name="Schedule" component={Schedule} />

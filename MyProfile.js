@@ -12,7 +12,7 @@ import { doc, getDoc, setDoc } from "firebase/firestore"; // Import Firestore fu
 import getCurrentUserId from "./getCurrentUserId"; // Import getCurrentUserId function
 import { db } from "./config"; // Import the db variable
 
-const MyProfileScreen = () => {
+const MyProfile = () => {
   const navigation = useNavigation();
   const [weight, setWeight] = useState(null);
   const [height, setHeight] = useState(null);
@@ -203,4 +203,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default MyProfileScreen;
+export default MyProfile;

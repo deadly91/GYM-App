@@ -9,7 +9,7 @@ import {
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 
-const AuthenticatedScreen = ({ user, handleAuthentication }) => {
+const Authenticated = ({ user, handleAuthentication }) => {
   const navigation = useNavigation();
 
   const navigateToProfile = () => {
@@ -141,4 +141,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default AuthenticatedScreen;
+export default Authenticated;
