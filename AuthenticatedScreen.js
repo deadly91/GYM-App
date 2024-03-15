@@ -1,28 +1,40 @@
-import React from 'react';
-import { View, Text, Button, StyleSheet, SafeAreaView, TouchableOpacity } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
+import React from "react";
+import {
+  View,
+  Text,
+  Button,
+  StyleSheet,
+  SafeAreaView,
+  TouchableOpacity,
+} from "react-native";
+import { useNavigation } from "@react-navigation/native";
 
 const AuthenticatedScreen = ({ user, handleAuthentication }) => {
   const navigation = useNavigation();
 
   const navigateToProfile = () => {
     // Navigate to My Profile screen
-    navigation.navigate('MyProfile');
+    navigation.navigate("MyProfile");
   };
 
   const navigateToSchedule = () => {
     // Navigate to Schedule screen
-    navigation.navigate('Schedule');
+    navigation.navigate("Schedule");
   };
 
   const navigateToWorkout = () => {
     // Navigate to Workout screen
-    navigation.navigate('Workout');
+    navigation.navigate("Workout");
   };
 
   const navigateToRegistration = () => {
-     // Navigate to Register screen
-    navigation.navigate('Registration');
+    // Navigate to Register screen
+    navigation.navigate("Registration");
+  };
+
+  const navigateToNutritionmenus = () => {
+    // Navigate to Nutrition menus
+    navigation.navigate("Nutritionmenus");
   };
 
   return (
@@ -31,25 +43,50 @@ const AuthenticatedScreen = ({ user, handleAuthentication }) => {
         <View style={styles.headerContent}>
           <Text style={styles.emailText}>{user.email}</Text>
           <View style={styles.profileButtonContainer}>
-            <Button title="My Profile" onPress={navigateToProfile} color="#3498db" />
+            <Button
+              title="My Profile"
+              onPress={navigateToProfile}
+              color="#3498db"
+            />
           </View>
         </View>
       </View>
       <View style={styles.contentContainer}>
         <View style={styles.buttonContainer}>
-          <TouchableOpacity onPress={navigateToSchedule} style={[styles.button, { backgroundColor: '#9b59b6' }]}>
+          <TouchableOpacity
+            onPress={navigateToSchedule}
+            style={[styles.button, { backgroundColor: "#9b59b6" }]}
+          >
             <Text style={styles.buttonText}>Calendar</Text>
           </TouchableOpacity>
-          <TouchableOpacity onPress={navigateToWorkout} style={[styles.button, { backgroundColor: '#9b59b6' }]}>
+          <TouchableOpacity
+            onPress={navigateToWorkout}
+            style={[styles.button, { backgroundColor: "#9b59b6" }]}
+          >
             <Text style={styles.buttonText}>Workout Examples</Text>
           </TouchableOpacity>
         </View>
-        <TouchableOpacity onPress={navigateToRegistration} style={[styles.button, { backgroundColor: '#9b59b6' }]}>
-          <Text style={styles.buttonText}>Register for class</Text>
-        </TouchableOpacity>
+        <View style={styles.buttonContainer}>
+          <TouchableOpacity
+            onPress={navigateToRegistration}
+            style={[styles.button, { backgroundColor: "#9b59b6" }]}
+          >
+            <Text style={styles.buttonText}>Register for class</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={navigateToNutritionmenus}
+            style={[styles.button, { backgroundColor: "#9b59b6" }]}
+          >
+            <Text style={styles.buttonText}>Nutrition menus</Text>
+          </TouchableOpacity>
+        </View>
       </View>
       <View style={styles.bottomContainer}>
-        <Button title="Log Off" onPress={handleAuthentication} color="#e74c3c" />
+        <Button
+          title="Log Off"
+          onPress={handleAuthentication}
+          color="#e74c3c"
+        />
       </View>
     </SafeAreaView>
   );
@@ -58,34 +95,35 @@ const AuthenticatedScreen = ({ user, handleAuthentication }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#f0f0f0',
+    backgroundColor: "#f0f0f0",
   },
   headerContainer: {
     paddingHorizontal: 16,
     paddingTop: 16,
   },
   headerContent: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
   },
   emailText: {
     fontSize: 18,
-    textAlign: 'left',
+    textAlign: "left",
   },
   profileButtonContainer: {
     marginLeft: 8, // Add some spacing between email and button
   },
   contentContainer: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: "center",
+    justifyContent: "center",
   },
   buttonContainer: {
-    flexDirection: 'row',
+    flexDirection: "row",
     marginBottom: 16,
   },
   button: {
+    flex: 1,
     borderRadius: 8,
     paddingVertical: 10,
     paddingHorizontal: 20,
@@ -93,11 +131,11 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     fontSize: 16,
-    color: '#fff',
-    textAlign: 'center',
+    color: "#fff",
+    textAlign: "center",
   },
   bottomContainer: {
-    justifyContent: 'flex-end',
+    justifyContent: "flex-end",
     marginBottom: 16,
     marginHorizontal: 16,
   },

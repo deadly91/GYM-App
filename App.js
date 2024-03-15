@@ -11,6 +11,7 @@ import Schedule from "./Schedule";
 import Workout from "./Workout";
 import Registration from "./Registration";
 import ClassDetails from "./ClassDetails";
+import Nutritionmenus from "./Nutritionmenus";
 import firebaseConfig from "./config";
 import {
   getAuth,
@@ -62,14 +63,17 @@ const App = () => {
         }
       }
     } catch (error) {
-      if (error.code === "auth/email-already-in-use") { //database
+      if (error.code === "auth/email-already-in-use") {
+        //database
         Alert.alert(
           "Error",
           "Email is already in use. Please use a different email."
         );
-      } else if (error.code === "auth/invalid-credential") { //database error
+      } else if (error.code === "auth/invalid-credential") {
+        //database error
         Alert.alert("Error", "Invalid credential.");
-      } else if (error.code === "auth/weak-password") { //database error
+      } else if (error.code === "auth/weak-password") {
+        //database error
         Alert.alert("Error", "Password should be at least 6 characters.");
       } else {
         Alert.alert("Error", "Authentication error. Please try again.");
@@ -109,6 +113,7 @@ const App = () => {
         <Stack.Screen name="Workout" component={Workout} />
         <Stack.Screen name="Registration" component={Registration} />
         <Stack.Screen name="ClassDetails" component={ClassDetails} />
+        <Stack.Screen name="Nutritionmenus" component={Nutritionmenus} />
       </Stack.Navigator>
     </NavigationContainer>
   );
