@@ -12,6 +12,9 @@ import Workout from "./Workout";
 import Registration from "./Registration";
 import ClassDetails from "./ClassDetails";
 import Nutritionmenus from "./Nutritionmenus";
+import OneMonth from "./menus/OneMonth";
+import ThreeMonth from "./menus/ThreeMonth";
+import FiveMonth from "./menus/FiveMonth";
 import firebaseConfig from "./config";
 import {
   getAuth,
@@ -114,6 +117,9 @@ const App = () => {
         <Stack.Screen name="Registration" component={Registration} />
         <Stack.Screen name="ClassDetails" component={ClassDetails} />
         <Stack.Screen name="Nutritionmenus" component={Nutritionmenus} />
+        <Stack.Screen name="OneMonth" component={OneMonth} />
+        <Stack.Screen name="ThreeMonth" component={ThreeMonth} />
+        <Stack.Screen name="FiveMonth" component={FiveMonth} />
       </Stack.Navigator>
     </NavigationContainer>
   );

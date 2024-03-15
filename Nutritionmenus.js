@@ -16,7 +16,19 @@ const Nutritionmenus = () => {
   };
 
   const handleMenuSelection = (menu) => {
-    // Handle menu selection
+    switch (menu) {
+      case "1 month menu":
+        navigation.navigate("OneMonth");
+        break;
+      case "3 month menu":
+        navigation.navigate("ThreeMonth");
+        break;
+      case "5 month menu":
+        navigation.navigate("FiveMonth");
+        break;
+      default:
+        break;
+    }
   };
 
   useEffect(() => {
@@ -66,9 +78,11 @@ const styles = StyleSheet.create({
     marginBottom: 16,
   },
   title: {
-    fontSize: 24,
+    fontSize: 30,
     fontWeight: "bold",
+    marginBottom: 16,
     textAlign: "center",
+    fontWeight: "bold",
   },
   content: {
     alignItems: "center", // Center buttons horizontally
