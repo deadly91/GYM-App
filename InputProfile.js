@@ -1,9 +1,16 @@
-import React, { useState } from 'react';
-import { View, Text, Button, TextInput, StyleSheet, SafeAreaView } from 'react-native';
+import React, { useState } from "react";
+import {
+  View,
+  Text,
+  Button,
+  TextInput,
+  StyleSheet,
+  SafeAreaView,
+} from "react-native";
 
 const InputProfile = ({ route, navigation }) => {
-  const [weight, setWeight] = useState('');
-  const [height, setHeight] = useState('');
+  const [weight, setWeight] = useState("");
+  const [height, setHeight] = useState("");
 
   const handleSave = () => {
     // Validate input (you may add more robust validation as needed)
@@ -15,8 +22,13 @@ const InputProfile = ({ route, navigation }) => {
       navigation.goBack();
     } else {
       // Handle validation error (e.g., show an alert)
-      alert('Please enter valid weight and height.');
+      alert("Please enter valid weight and height.");
     }
+  };
+
+  const handleCancel = () => {
+    // Navigate back to MyProfileScreen without saving changes
+    navigation.goBack();
   };
 
   return (
@@ -37,10 +49,10 @@ const InputProfile = ({ route, navigation }) => {
           value={height}
           onChangeText={(text) => setHeight(text)}
         />
-        <Button title="Save" onPress={handleSave} color="#3498db" />
       </View>
-      <View style={styles.bottomContainer}>
-        <Button title="Cancel" onPress={() => navigation.goBack()} color="#e74c3c" />
+      <View style={styles.buttonContainer}>
+        <Button title="Save Profile" onPress={handleSave} color="#3498db" />
+        <Button title="Cancel" onPress={handleCancel} color="#e74c3c" />
       </View>
     </SafeAreaView>
   );
@@ -49,26 +61,32 @@ const InputProfile = ({ route, navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#f0f0f0',
+    backgroundColor: "#f0f0f0",
+    justifyContent: "space-between",
   },
   contentContainer: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
     padding: 16,
   },
   title: {
     fontSize: 24,
-    fontWeight: 'bold',
+    fontWeight: "bold",
     marginBottom: 16,
   },
   input: {
     height: 40,
-    width: '80%',
-    borderColor: 'gray',
+    width: "80%",
+    borderColor: "gray",
     borderWidth: 1,
     marginBottom: 16,
     paddingLeft: 8,
+  },
+  buttonContainer: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    paddingHorizontal: 101,
+    paddingBottom: 16,
   },
 });
 
