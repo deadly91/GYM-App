@@ -14,7 +14,6 @@ import { db } from "./config"; // Import the db variable
 
 const Authenticated = ({ user, handleAuthentication }) => {
   const navigation = useNavigation();
-  const gloves = require("./Pictures/gloves.jpg");
   const [productData, setProductData] = useState();
   
   const fetchProducts = async () => {
