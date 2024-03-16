@@ -1,24 +1,92 @@
-import { useNavigation } from "@react-navigation/native";
-import React from "react";
-import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
+import React, { useState } from "react";
+import {
+  View,
+  Text,
+  StyleSheet,
+  TouchableOpacity,
+  TextInput,
+} from "react-native";
+import { useNavigation, useRoute } from "@react-navigation/native";
+import DetailModal from "./DetailModal"; // Import your DetailModal component
 
 const AppShop = () => {
+  const route = useRoute();
+  const { data } = route.params;
   const navigation = useNavigation();
+  const [searchQuery, setSearchQuery] = useState("");
+  const [selectedItem, setSelectedItem] = useState(null); // State to hold the selected item
+  const [isModalVisible, setIsModalVisible] = useState(false); // State to manage modal visibility
 
   const handleReturn = () => {
     navigation.goBack();
+  };
+
+  const handleSearch = (text) => {
+    setSearchQuery(text);
+  };
+
+  const handleItemPress = (item) => {
+    setSelectedItem(item); // Set the selected item when an item is pressed
+    setIsModalVisible(true); // Show the modal
+  };
+
+  const handleModalClose = () => {
+    setIsModalVisible(false); // Hide the modal
+  };
+
+  const handlePurchase = () => {
+    // Logic to handle item purchase
+    // This function can be implemented based on your requirements
+    // For example, you can make an API call to process the purchase
+    console.log("Item purchased:", selectedItem);
+    // Close the modal after purchase
+    setIsModalVisible(false);
   };
 
   return (
     <View style={styles.container}>
       <View style={styles.titleContainer}>
         <Text style={styles.title}>App Shop</Text>
+        <View style={styles.searchContainer}>
+          <TextInput
+            style={styles.input}
+            placeholder="Search..."
+            onChangeText={handleSearch}
+            value={searchQuery}
+          />
+        </View>
       </View>
 
       <View style={styles.content}>
-        <Text style={styles.text}>Coming soon !!!</Text>
+        {/* Dynamically render data based on search query */}
+        {data.map((item) => {
+          // Check if item matches search query
+          if (
+            searchQuery === "" ||
+            item.name.toLowerCase().includes(searchQuery.toLowerCase())
+          ) {
+            return (
+              <TouchableOpacity
+                key={item.id}
+                style={styles.item}
+                onPress={() => handleItemPress(item)} // Pass the item to handleItemPress function
+              >
+                <Text>{item.name}</Text>
+              </TouchableOpacity>
+            );
+          } else {
+            return null; // If item does not match search query, don't render it
+          }
+        })}
       </View>
 
+      {/* Render the DetailModal component */}
+      <DetailModal
+        isVisible={isModalVisible}
+        onClose={handleModalClose}
+        item={selectedItem} // Pass the selected item to the DetailModal component
+        onPurchase={handlePurchase}
+      />
       <TouchableOpacity onPress={handleReturn}>
         <View style={styles.btn}>
           <Text style={styles.btnText}>GO BACK</Text>
@@ -44,14 +112,26 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     textAlign: "center",
   },
+  searchContainer: {
+    marginTop: 10,
+    width: "100%", // Make the search bar take up the full width
+  },
+  input: {
+    borderWidth: 1,
+    borderColor: "#ccc",
+    borderRadius: 8,
+    paddingHorizontal: 12,
+    paddingVertical: 8,
+    fontSize: 25,
+  },
   content: {
     alignItems: "center",
     marginBottom: 20,
   },
-  text: {
-    fontSize: 20,
-    fontWeight: "bold",
-    textAlign: "center",
+  item: {
+    padding: 10,
+    borderBottomWidth: 1,
+    borderBottomColor: "#ccc",
   },
   btn: {
     alignItems: "center",

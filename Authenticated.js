@@ -11,6 +11,7 @@ import { useNavigation } from "@react-navigation/native";
 
 const Authenticated = ({ user, handleAuthentication }) => {
   const navigation = useNavigation();
+  const gloves = require("./Pictures/gloves.jpg");
 
   const navigateToProfile = () => {
     navigation.navigate("MyProfile");
@@ -33,9 +34,17 @@ const Authenticated = ({ user, handleAuthentication }) => {
   };
 
   const navigateToAppShop = () => {
-    navigation.navigate("AppShop");
+    //navigation.navigate("AppShop");
+    navigation.navigate("AppShop", { data: arrayOfItems });
   };
 
+  const arrayOfItems = [
+    { id: 1, name: "Item 1", price: 10, stock: 15, picture: gloves },
+    { id: 2, name: "Item 2", price: 20, stock: 15, picture: gloves },
+    { id: 3, name: "Item 3", price: 30, stock: 100, picture: gloves },
+    { id: 4, name: "Item 4", price: 40, stock: 40, picture: gloves },
+    { id: 5, name: "Item 5", price: 50, stock: 50, picture: gloves },
+  ];
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.headerContainer}>
