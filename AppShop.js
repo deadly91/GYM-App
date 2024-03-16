@@ -5,6 +5,7 @@ import {
   StyleSheet,
   TouchableOpacity,
   TextInput,
+  ScrollView,
 } from "react-native";
 import { useNavigation, useRoute } from "@react-navigation/native";
 import DetailModal from "./DetailModal"; // Import your DetailModal component
@@ -57,7 +58,7 @@ const AppShop = () => {
         </View>
       </View>
 
-      <View style={styles.content}>
+      <ScrollView contentContainerStyle={styles.content}>
         {/* Dynamically render data based on search query */}
         {data.map((item) => {
           // Check if item matches search query
@@ -71,14 +72,14 @@ const AppShop = () => {
                 style={styles.item}
                 onPress={() => handleItemPress(item)} // Pass the item to handleItemPress function
               >
-                <Text>{item.name}</Text>
+                <Text style={styles.itemText}>{item.name}</Text>
               </TouchableOpacity>
             );
           } else {
             return null; // If item does not match search query, don't render it
           }
         })}
-      </View>
+      </ScrollView>
 
       {/* Render the DetailModal component */}
       <DetailModal
@@ -101,7 +102,6 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#fff",
     padding: 16,
-    justifyContent: "space-between",
   },
   titleContainer: {
     alignItems: "center",
@@ -122,16 +122,22 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     paddingHorizontal: 12,
     paddingVertical: 8,
-    fontSize: 25,
+    fontSize: 18,
   },
   content: {
+    flexGrow: 1,
     alignItems: "center",
-    marginBottom: 20,
+    paddingBottom: 20,
   },
   item: {
+    width: "90%",
     padding: 10,
-    borderBottomWidth: 1,
-    borderBottomColor: "#ccc",
+    marginVertical: 8,
+    backgroundColor: "#f0f0f0",
+    borderRadius: 8,
+  },
+  itemText: {
+    fontSize: 16,
   },
   btn: {
     alignItems: "center",
@@ -140,6 +146,7 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     paddingHorizontal: 20,
     backgroundColor: "#007aff",
+    marginBottom: 20,
   },
   btnText: {
     fontSize: 18,

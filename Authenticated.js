@@ -44,6 +44,21 @@ const Authenticated = ({ user, handleAuthentication }) => {
     { id: 3, name: "Item 3", price: 30, stock: 100, picture: gloves },
     { id: 4, name: "Item 4", price: 40, stock: 40, picture: gloves },
     { id: 5, name: "Item 5", price: 50, stock: 50, picture: gloves },
+    { id: 6, name: "Item 6", price: 10, stock: 15, picture: gloves },
+    { id: 7, name: "Item 7", price: 20, stock: 15, picture: gloves },
+    { id: 8, name: "Item 8", price: 30, stock: 100, picture: gloves },
+    { id: 9, name: "Item 9", price: 40, stock: 40, picture: gloves },
+    { id: 10, name: "Item 10", price: 50, stock: 50, picture: gloves },
+    { id: 11, name: "Item 11", price: 10, stock: 15, picture: gloves },
+    { id: 12, name: "Item 12", price: 20, stock: 15, picture: gloves },
+    { id: 13, name: "Item 13", price: 30, stock: 100, picture: gloves },
+    { id: 14, name: "Item 14", price: 40, stock: 40, picture: gloves },
+    { id: 15, name: "Item 15", price: 50, stock: 50, picture: gloves },
+    { id: 16, name: "Item 16", price: 10, stock: 15, picture: gloves },
+    { id: 17, name: "Item 17", price: 20, stock: 15, picture: gloves },
+    { id: 18, name: "Item 18", price: 30, stock: 100, picture: gloves },
+    { id: 19, name: "Item 19", price: 40, stock: 40, picture: gloves },
+    { id: 20, name: "Item 20", price: 50, stock: 50, picture: gloves },
   ];
   return (
     <SafeAreaView style={styles.container}>
