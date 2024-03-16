@@ -1,4 +1,3 @@
-import React from "react";
 import {
   View,
   Text,
@@ -8,11 +7,44 @@ import {
   TouchableOpacity,
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
+import React, { useState, useEffect } from "react";
+import { doc, getDoc } from "firebase/firestore"; // Import Firestore functions
+import { db } from "./config"; // Import the db variable
+
 
 const Authenticated = ({ user, handleAuthentication }) => {
   const navigation = useNavigation();
   const gloves = require("./Pictures/gloves.jpg");
+  const [productData, setProductData] = useState();
+  
+  const fetchProducts = async () => {
+    try {
+        const ref1 = doc(db, "products", 'EOkvHRSMexKtmgz8A1so');
+        const doc1 = await getDoc(ref1);
+        if (doc1.exists()) {
+            const userData1 = doc1.data();
+            const ref2 = doc(db, "products", 'kLGDAFpBZVeAkSC4YqBW');
+            const doc2 = await getDoc(ref2);
+            if (doc2.exists()) {
+                const userData2 = doc2.data();
+                setProductData([userData1, userData2]); // Set product data array
+            } else {
+                console.log("No product data found for the second document.");
+            }
+        } else {
+            console.log("No product data found for the first document.");
+        }
+    } catch (error) {
+        console.error("Error fetching profile data from Firestore:", error);
+    }
+}
 
+useEffect(() => {
+    fetchProducts();
+}, []); 
+  
+  
+  
   const navigateToProfile = () => {
     navigation.navigate("MyProfile");
   };
@@ -34,32 +66,9 @@ const Authenticated = ({ user, handleAuthentication }) => {
   };
 
   const navigateToAppShop = () => {
-    //navigation.navigate("AppShop");
-    navigation.navigate("AppShop", { data: arrayOfItems });
+    navigation.navigate('AppShop', { data: productData });
   };
 
-  const arrayOfItems = [
-    { id: 1, name: "Item 1", price: 10, stock: 15, picture: gloves },
-    { id: 2, name: "Item 2", price: 20, stock: 15, picture: gloves },
-    { id: 3, name: "Item 3", price: 30, stock: 100, picture: gloves },
-    { id: 4, name: "Item 4", price: 40, stock: 40, picture: gloves },
-    { id: 5, name: "Item 5", price: 50, stock: 50, picture: gloves },
-    { id: 6, name: "Item 6", price: 10, stock: 15, picture: gloves },
-    { id: 7, name: "Item 7", price: 20, stock: 15, picture: gloves },
-    { id: 8, name: "Item 8", price: 30, stock: 100, picture: gloves },
-    { id: 9, name: "Item 9", price: 40, stock: 40, picture: gloves },
-    { id: 10, name: "Item 10", price: 50, stock: 50, picture: gloves },
-    { id: 11, name: "Item 11", price: 10, stock: 15, picture: gloves },
-    { id: 12, name: "Item 12", price: 20, stock: 15, picture: gloves },
-    { id: 13, name: "Item 13", price: 30, stock: 100, picture: gloves },
-    { id: 14, name: "Item 14", price: 40, stock: 40, picture: gloves },
-    { id: 15, name: "Item 15", price: 50, stock: 50, picture: gloves },
-    { id: 16, name: "Item 16", price: 10, stock: 15, picture: gloves },
-    { id: 17, name: "Item 17", price: 20, stock: 15, picture: gloves },
-    { id: 18, name: "Item 18", price: 30, stock: 100, picture: gloves },
-    { id: 19, name: "Item 19", price: 40, stock: 40, picture: gloves },
-    { id: 20, name: "Item 20", price: 50, stock: 50, picture: gloves },
-  ];
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.headerContainer}>

@@ -8,15 +8,15 @@ import {
   ScrollView,
 } from "react-native";
 import { useNavigation, useRoute } from "@react-navigation/native";
-import DetailModal from "./DetailModal"; // Import your DetailModal component
+import DetailModal from "./DetailModal";
 
 const AppShop = () => {
+  const navigation = useNavigation();
   const route = useRoute();
   const { data } = route.params;
-  const navigation = useNavigation();
   const [searchQuery, setSearchQuery] = useState("");
-  const [selectedItem, setSelectedItem] = useState(null); // State to hold the selected item
-  const [isModalVisible, setIsModalVisible] = useState(false); // State to manage modal visibility
+  const [selectedItem, setSelectedItem] = useState(null);
+  const [isModalVisible, setIsModalVisible] = useState(false);
 
   const handleReturn = () => {
     navigation.goBack();
@@ -27,20 +27,16 @@ const AppShop = () => {
   };
 
   const handleItemPress = (item) => {
-    setSelectedItem(item); // Set the selected item when an item is pressed
-    setIsModalVisible(true); // Show the modal
+    setSelectedItem(item);
+    setIsModalVisible(true);
   };
 
   const handleModalClose = () => {
-    setIsModalVisible(false); // Hide the modal
+    setIsModalVisible(false);
   };
 
   const handlePurchase = () => {
-    // Logic to handle item purchase
-    // This function can be implemented based on your requirements
-    // For example, you can make an API call to process the purchase
     console.log("Item purchased:", selectedItem);
-    // Close the modal after purchase
     setIsModalVisible(false);
   };
 
@@ -59,9 +55,7 @@ const AppShop = () => {
       </View>
 
       <ScrollView contentContainerStyle={styles.content}>
-        {/* Dynamically render data based on search query */}
         {data.map((item) => {
-          // Check if item matches search query
           if (
             searchQuery === "" ||
             item.name.toLowerCase().includes(searchQuery.toLowerCase())
@@ -70,22 +64,21 @@ const AppShop = () => {
               <TouchableOpacity
                 key={item.id}
                 style={styles.item}
-                onPress={() => handleItemPress(item)} // Pass the item to handleItemPress function
+                onPress={() => handleItemPress(item)}
               >
                 <Text style={styles.itemText}>{item.name}</Text>
               </TouchableOpacity>
             );
           } else {
-            return null; // If item does not match search query, don't render it
+            return null;
           }
         })}
       </ScrollView>
 
-      {/* Render the DetailModal component */}
       <DetailModal
         isVisible={isModalVisible}
         onClose={handleModalClose}
-        item={selectedItem} // Pass the selected item to the DetailModal component
+        item={selectedItem}
         onPurchase={handlePurchase}
       />
       <TouchableOpacity onPress={handleReturn}>
@@ -114,7 +107,7 @@ const styles = StyleSheet.create({
   },
   searchContainer: {
     marginTop: 10,
-    width: "100%", // Make the search bar take up the full width
+    width: "100%",
   },
   input: {
     borderWidth: 1,
