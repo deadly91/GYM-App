@@ -1,6 +1,7 @@
 import { initializeApp } from 'firebase/app';
 import { getFirestore } from 'firebase/firestore';
 
+
 const firebaseConfig = {
   apiKey: "AIzaSyB5wpdbS8L8ZjqxhIX4HdnMugYEz-AMC7c",
   authDomain: "gym-app-a4487.firebaseapp.com",

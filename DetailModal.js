@@ -35,7 +35,7 @@ const DetailModal = ({ isVisible, onClose, item, onPurchase }) => {
         <View style={styles.modalContent}>
           {showPicture ? (
             <View style={styles.pictureContainer}>
-              <Image source={item.picture} style={styles.image} />
+              <Image source={{ uri: item.picture }} style={styles.image} />
               <TouchableOpacity onPress={handleClose}>
                 <Text style={styles.closePictureButton}>Close Picture</Text>
               </TouchableOpacity>

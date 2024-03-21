@@ -11,18 +11,24 @@ import {
 const InputProfile = ({ route, navigation }) => {
   const [weight, setWeight] = useState("");
   const [height, setHeight] = useState("");
+  const [age, setAge] = useState("");
 
   const handleSave = () => {
     // Validate input (you may add more robust validation as needed)
-    if (weight && height) {
+    if (weight && height && age) {
       // Call the onProfileInput function passed from MyProfileScreen
-      route.params.onProfileInput(parseFloat(weight), parseFloat(height));
+      route.params.onProfileInput(
+        parseFloat(weight),
+        parseFloat(height),
+        parseInt(age)
+      );
 
       // Navigate back to MyProfileScreen
       navigation.goBack();
+      //navigation.goBack();
     } else {
       // Handle validation error (e.g., show an alert)
-      alert("Please enter valid weight and height.");
+      alert("Please enter valid weight, height, and age.");
     }
   };
 
@@ -35,24 +41,44 @@ const InputProfile = ({ route, navigation }) => {
     <SafeAreaView style={styles.container}>
       <View style={styles.contentContainer}>
         <Text style={styles.title}>Input Profile</Text>
-        <TextInput
-          style={styles.input}
-          placeholder="Enter weight (kg)"
-          keyboardType="numeric"
-          value={weight}
-          onChangeText={(text) => setWeight(text)}
-        />
-        <TextInput
-          style={styles.input}
-          placeholder="Enter height (cm)"
-          keyboardType="numeric"
-          value={height}
-          onChangeText={(text) => setHeight(text)}
-        />
+        <View style={styles.inputContainer}>
+          <Text style={styles.label}>Weight (kg):</Text>
+          <TextInput
+            style={styles.input}
+            placeholder="Enter weight (kg)"
+            keyboardType="numeric"
+            value={weight}
+            onChangeText={(text) => setWeight(text)}
+          />
+        </View>
+        <View style={styles.inputContainer}>
+          <Text style={styles.label}>Height (M):</Text>
+          <TextInput
+            style={styles.input}
+            placeholder="Enter height (M)"
+            keyboardType="numeric"
+            value={height}
+            onChangeText={(text) => setHeight(text)}
+          />
+        </View>
+        <View style={styles.inputContainer}>
+          <Text style={styles.label}>Age:</Text>
+          <TextInput
+            style={styles.input}
+            placeholder="Enter age"
+            keyboardType="numeric"
+            value={age}
+            onChangeText={(text) => setAge(text)}
+          />
+        </View>
       </View>
       <View style={styles.buttonContainer}>
-        <Button title="Save Profile" onPress={handleSave} color="#3498db" />
-        <Button title="Cancel" onPress={handleCancel} color="#e74c3c" />
+        <View style={styles.button}>
+          <Button title="Save" onPress={handleSave} color="#3498db" />
+        </View>
+        <View style={styles.button}>
+          <Button title="Cancel" onPress={handleCancel} color="#e74c3c" />
+        </View>
       </View>
     </SafeAreaView>
   );
@@ -61,8 +87,9 @@ const InputProfile = ({ route, navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#f0f0f0",
-    justifyContent: "space-between",
+    backgroundColor: "#355C7D",
+    justifyContent: "center",
+    alignItems: "center",
   },
   contentContainer: {
     justifyContent: "center",
@@ -73,20 +100,35 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontWeight: "bold",
     marginBottom: 16,
+    color: "#FFFFFF",
+  },
+  inputContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    marginVertical: 8,
+  },
+  label: {
+    minWidth: 100,
+    marginRight: 10,
+    color: "#FFFFFF"
   },
   input: {
+    flex: 1,
     height: 40,
-    width: "80%",
     borderColor: "gray",
     borderWidth: 1,
-    marginBottom: 16,
-    paddingLeft: 8,
+    paddingHorizontal: 8,
+    backgroundColor: "#FFFFFF",
   },
   buttonContainer: {
     flexDirection: "row",
     justifyContent: "space-between",
-    paddingHorizontal: 101,
-    paddingBottom: 16,
+    width: "80%",
+    paddingHorizontal: 16,
+    marginTop: 16,
+  },
+  button: {
+    width: "48%",
   },
 });
 

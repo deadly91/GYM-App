@@ -28,6 +28,7 @@ import {
 const Stack = createStackNavigator();
 
 const App = () => {
+  const [productData, setProductData] = useState([]);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [user, setUser] = useState(null);
@@ -86,6 +87,9 @@ const App = () => {
   };
 
   return (
+
+
+    
     <NavigationContainer>
       <Stack.Navigator screenOptions={{ headerShown: false }}>
         <Stack.Screen name="Auth">

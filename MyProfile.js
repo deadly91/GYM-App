@@ -1,16 +1,9 @@
 import React, { useState, useEffect } from "react";
-import {
-  View,
-  Text,
-  Button,
-  StyleSheet,
-  SafeAreaView,
-  TouchableOpacity,
-} from "react-native";
+import { View, Text, Button, StyleSheet, SafeAreaView, TouchableOpacity } from "react-native";
 import { useNavigation } from "@react-navigation/native";
-import { doc, getDoc, setDoc } from "firebase/firestore"; // Import Firestore functions
-import getCurrentUserId from "./getCurrentUserId"; // Import getCurrentUserId function
-import { db } from "./config"; // Import the db variable
+import { doc, getDoc, setDoc } from "firebase/firestore";
+import getCurrentUserId from "./getCurrentUserId";
+import { db } from "./config";
 
 const MyProfile = () => {
   const navigation = useNavigation();
@@ -18,20 +11,20 @@ const MyProfile = () => {
   const [height, setHeight] = useState(null);
   const [bmi, setBMI] = useState(null);
   const [bmiStatus, setbmiStatus] = useState(null);
+  const [age, setAge] = useState(null);
 
-  // Function to fetch profile data from Firestore
   const fetchProfileData = async () => {
     try {
-      const userId = getCurrentUserId(); // Get the current user's ID
+      const userId = getCurrentUserId();
       const userRef = doc(db, "users", userId);
       const docSnap = await getDoc(userRef);
-
       if (docSnap.exists()) {
         const userData = docSnap.data();
         setWeight(userData.weight);
         setHeight(userData.height);
         setBMI(userData.bmi);
         setbmiStatus(calculateBMIStatus(userData.bmi));
+        setAge(userData.age);
       } else {
         console.log("No profile data found for the current user.");
       }
@@ -41,75 +34,52 @@ const MyProfile = () => {
   };
 
   useEffect(() => {
-    // Fetch profile data when the component mounts
     fetchProfileData();
-  }, []); // Empty dependency array ensures the effect runs only once after the initial render
+  }, []);
 
-  // Function to save profile data to Firestore
-  const saveProfileDataToFirestore = async (weight, height, bmi, bmiStatus) => {
+  const saveProfileDataToFirestore = async (newWeight, newHeight, newAge) => {
     try {
-      const userId = getCurrentUserId(); // Get the current user's ID
+      const userId = getCurrentUserId();
       const userRef = doc(db, "users", userId);
-
-      // Save profile data to Firestore
-
-      await setDoc(
-        userRef,
-        {
-          weight: weight,
-          height: height,
-          bmi: bmi,
-          bmiStatus: bmiStatus,
-        },
-        { merge: true }
-      ); // Use merge option to merge new data with existing document
-
+      const newBMI = newWeight / (newHeight * newHeight);
+      const newBMIStatus = calculateBMIStatus(newBMI);
+      await setDoc(userRef, {
+        weight: newWeight,
+        height: newHeight,
+        age: newAge,
+        bmi: newBMI,
+        bmiStatus: newBMIStatus
+      }, { merge: true });
+      // Update local state with new profile data
+      setWeight(newWeight);
+      setHeight(newHeight);
+      setAge(newAge);
+      setBMI(newBMI);
+      setbmiStatus(newBMIStatus);
       console.log("Profile data saved to Firestore successfully.");
     } catch (error) {
       console.error("Error saving profile data to Firestore:", error);
     }
   };
 
-  const handleEditProfile = () => {
-    navigation.navigate("EditProfile", {
-      onProfileEdit: (newWeight, newHeight) => {
-        const newBmi = newWeight / (newHeight * newHeight);
-        const NewbmiStatus = calculateBMIStatus(newBmi);
-        setWeight(newWeight);
-        setHeight(newHeight);
-        setBMI(newBmi);
-        setbmiStatus(NewbmiStatus);
-        // Save updated profile data to Firestore
-        saveProfileDataToFirestore(newWeight, newHeight, newBmi, bmiStatus);
-      },
-    });
-  };
-
-  const handleInputProfile = () => {
-    navigation.navigate("InputProfile", {
-      onProfileInput: (inputWeight, inputHeight) => {
-        const bmi = (inputWeight / inputHeight ** 2).toFixed(2);
-        setWeight(inputWeight);
-        setHeight(inputHeight);
-        setBMI(bmi);
-        setbmiStatus(calculateBMIStatus(bmi));
-        // Save profile data to Firestore
-        saveProfileDataToFirestore(inputWeight, inputHeight, bmi, bmiStatus);
-      },
-    });
-  };
   const calculateBMIStatus = (bmi) => {
-    //This function will restore a string for the bmi status attribute
-    if (bmi < 18) {
+    if (bmi < 18.5) {
       return "Underweight";
-    } else if (bmi >= 18 && bmi <= 24.9) {
-      return "Normal Weight";
-    } else if (bmi >= 25 && bmi <= 29.9) {
+    } else if (bmi >= 18.5 && bmi < 25) {
+      return "Normal weight";
+    } else if (bmi >= 25 && bmi < 30) {
       return "Overweight";
     } else {
       return "Obese";
     }
   };
+
+  const handleEditProfile = () => {
+    navigation.navigate("EditProfile", {
+      onProfileEdit: saveProfileDataToFirestore
+    });
+  };
+
   const handleReturn = () => {
     navigation.goBack();
   };
@@ -118,16 +88,17 @@ const MyProfile = () => {
     <SafeAreaView style={styles.container}>
       <View style={styles.contentContainer}>
         <Text style={styles.title}>My Profile</Text>
-        {weight !== null && height !== null && bmi !== null ? (
+        {weight !== null && height !== null && bmi !== null && age !== null ? (
           <View style={styles.profileInfoContainer}>
             <Text style={styles.infoText}>Weight: {weight} kg</Text>
-            <Text style={styles.infoText}>Height: {height} cm</Text>
+            <Text style={styles.infoText}>Height: {height} M</Text>
+            <Text style={styles.infoText}>Age: {age}</Text>
             <Text style={styles.infoText}>BMI: {bmi}</Text>
-            <Text style={styles.infoText}>Status: {bmiStatus}</Text>
+            <Text style={styles.infoText}>BMI Status: {bmiStatus}</Text>
             <Button
               title="Edit Profile"
               onPress={handleEditProfile}
-              color="#007aff"
+              color="#F8B195"
             />
           </View>
         ) : (
@@ -137,7 +108,9 @@ const MyProfile = () => {
             </Text>
             <Button
               title="Input Profile"
-              onPress={handleInputProfile}
+              onPress={() => navigation.navigate("InputProfile", {
+                onProfileInput: saveProfileDataToFirestore
+              })}
               color="#007aff"
             />
           </View>
@@ -157,7 +130,7 @@ const MyProfile = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#f0f0f0",
+    backgroundColor: "#355C7D",
   },
   contentContainer: {
     flex: 1,
@@ -169,6 +142,7 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontWeight: "bold",
     marginBottom: 16,
+    color: "#FFFFFF",
   },
   profileInfoContainer: {
     alignItems: "center",
@@ -181,6 +155,7 @@ const styles = StyleSheet.create({
   infoText: {
     fontSize: 18,
     marginBottom: 10,
+    color: "#FFFFFF",
   },
   footer: {
     justifyContent: "flex-end",
@@ -194,7 +169,7 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     paddingVertical: 10,
     paddingHorizontal: 20,
-    backgroundColor: "#007aff",
+    backgroundColor: "#C06C84",
   },
   btnText: {
     fontSize: 18,
