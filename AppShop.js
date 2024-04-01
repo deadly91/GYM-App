@@ -93,7 +93,7 @@ const AppShop = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
+    backgroundColor: "#355C7D",
     padding: 16,
   },
   titleContainer: {
@@ -104,12 +104,14 @@ const styles = StyleSheet.create({
     fontSize: 30,
     fontWeight: "bold",
     textAlign: "center",
+    color: "#FFFFFF",
   },
   searchContainer: {
     marginTop: 10,
     width: "100%",
   },
   input: {
+    backgroundColor: "#FFFFFF",
     borderWidth: 1,
     borderColor: "#ccc",
     borderRadius: 8,
@@ -138,7 +140,7 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     paddingVertical: 10,
     paddingHorizontal: 20,
-    backgroundColor: "#007aff",
+    backgroundColor: "#C06C84",
     marginBottom: 20,
   },
   btnText: {

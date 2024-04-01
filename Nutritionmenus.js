@@ -70,7 +70,7 @@ const Nutritionmenus = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#f0f0f0",
+    backgroundColor: "#355C7D",
     padding: 16,
     justifyContent: "space-between",
   },
@@ -84,23 +84,27 @@ const styles = StyleSheet.create({
     marginBottom: 16,
     textAlign: "center",
     fontWeight: "bold",
+    color: "#FFFFFF",
   },
   kosherText: {
     fontSize: 20,
     color: "#777",
     fontStyle: "italic",
     marginBottom: 8,
+    color: "#FFFFFF",
   },
   content: {
     alignItems: "center", // Center buttons horizontally
   },
   menuButton: {
-    borderRadius: 8,
+    width: 350, // Adjust the width as needed
     paddingVertical: 12,
-    paddingHorizontal: 20,
-    backgroundColor: "#3498db",
-    marginBottom: 12,
-    alignItems: "center",
+    paddingHorizontal: 20, // Reduced padding
+    marginBottom: 20,
+    backgroundColor: '#F8B195', // A vibrant blue color
+    borderRadius: 25,
+    alignItems: 'center',
+    marginVertical: 10,
   },
   menuButtonText: {
     fontSize: 16,
@@ -108,13 +112,11 @@ const styles = StyleSheet.create({
     color: "#fff",
   },
   btn: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "center",
+    backgroundColor: '#C06C84',
     borderRadius: 8,
-    paddingVertical: 10,
-    paddingHorizontal: 20,
-    backgroundColor: "#007aff",
+    paddingVertical: 12, // Adjust padding here
+    paddingHorizontal: 145, // Adjust padding here
+    marginBottom: 20,
   },
   goBackButtonText: {
     fontSize: 18,

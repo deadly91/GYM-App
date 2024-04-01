@@ -91,14 +91,18 @@ const MyProfile = () => {
         {weight !== null && height !== null && bmi !== null && age !== null ? (
           <View style={styles.profileInfoContainer}>
             <Text style={styles.infoText}>Weight: {weight} kg</Text>
+<<<<<<< HEAD
             <Text style={styles.infoText}>Height: {height} cm</Text>
+=======
+            <Text style={styles.infoText}>Height: {height} M</Text>
+>>>>>>> 83776171a896a52ce1c55ac6fb8d3369f261fa46
             <Text style={styles.infoText}>Age: {age}</Text>
             <Text style={styles.infoText}>BMI: {bmi}</Text>
             <Text style={styles.infoText}>BMI Status: {bmiStatus}</Text>
             <Button
               title="Edit Profile"
               onPress={handleEditProfile}
-              color="#007aff"
+              color="#F8B195"
             />
           </View>
         ) : (
@@ -130,7 +134,7 @@ const MyProfile = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#f0f0f0",
+    backgroundColor: "#355C7D",
   },
   contentContainer: {
     flex: 1,
@@ -142,6 +146,7 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontWeight: "bold",
     marginBottom: 16,
+    color: "#FFFFFF",
   },
   profileInfoContainer: {
     alignItems: "center",
@@ -154,6 +159,7 @@ const styles = StyleSheet.create({
   infoText: {
     fontSize: 18,
     marginBottom: 10,
+    color: "#FFFFFF",
   },
   footer: {
     justifyContent: "flex-end",
@@ -167,7 +173,7 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     paddingVertical: 10,
     paddingHorizontal: 20,
-    backgroundColor: "#007aff",
+    backgroundColor: "#C06C84",
   },
   btnText: {
     fontSize: 18,

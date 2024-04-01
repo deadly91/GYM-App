@@ -3,8 +3,8 @@ import { View, Text, TextInput, Button, StyleSheet } from 'react-native';
 
 const AuthForm = ({ email, setEmail, password, setPassword, isLogin, setIsLogin, handleAuthentication }) => {
   return (
-    <View>
-      <Text style={styles.welcomeText}>Welcome to my GYM app</Text>  
+    <View style={styles.container}>
+      <Text style={styles.welcomeText}>Welcome To GeniusGym!</Text>  
       
       <View style={styles.authContainer}>
         <Text style={styles.title}>{isLogin ? 'Sign In' : 'Sign Up'}</Text>
@@ -24,7 +24,7 @@ const AuthForm = ({ email, setEmail, password, setPassword, isLogin, setIsLogin,
           secureTextEntry
         />
         <View style={styles.buttonContainer}>
-          <Button title={isLogin ? 'Sign In' : 'Sign Up'} onPress={handleAuthentication} color="#3498db" />
+          <Button title={isLogin ? 'Sign In' : 'Sign Up'} onPress={handleAuthentication} color="#C06C84" />
         </View>
 
         <View style={styles.bottomContainer}>
@@ -38,11 +38,19 @@ const AuthForm = ({ email, setEmail, password, setPassword, isLogin, setIsLogin,
 };
 
 const styles = StyleSheet.create({
+  container: {
+    width: 900, // Adjust the width for both white boxes (Sign in & Sign up)
+    height: 900,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#355C7D',
+  },
   welcomeText: {
     fontSize: 24,
     fontWeight: 'bold',
     textAlign: 'center',
-    marginBottom: 20,
+    marginTop: -70,
+    color: '#FFFFFF',
   },
   authContainer: {
     width: 300, // Adjust the width for both white boxes (Sign in & Sign up)

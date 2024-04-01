@@ -2156,7 +2156,7 @@ const ThreeMonth = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
+    backgroundColor: "#355C7D",
     padding: 16,
   },
   title: {
@@ -2165,6 +2165,7 @@ const styles = StyleSheet.create({
     marginBottom: 16,
     textAlign: "center",
     fontWeight: "bold",
+    color: "#FFFFFF",
   },
   btn: {
     flexDirection: "row",
@@ -2173,12 +2174,12 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     paddingVertical: 10,
     paddingHorizontal: 20,
-    backgroundColor: "#007aff",
+    backgroundColor: "#C06C84",
   },
   btnText: {
     fontSize: 18,
     fontWeight: "600",
-    color: "#fff",
+    color: "#FFFFFF",
   },
   scrollView: {
     flex: 1,
@@ -2190,6 +2191,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: "bold",
     marginBottom: 8,
+    color: "#FFFFFF",
   },
   dayContainer: {
     marginBottom: 8,
@@ -2198,6 +2200,7 @@ const styles = StyleSheet.create({
     fontSize: 20, // Increased font size for day titles
     fontWeight: "bold",
     marginBottom: 8,
+    color: "#FFFFFF",
   },
   mealContainer: {
     marginBottom: 8,
@@ -2212,6 +2215,7 @@ const styles = StyleSheet.create({
   mealCategory: {
     fontWeight: "bold",
     textDecorationLine: "underline",
+    color: "#FFFFFF",
   },
 });
 

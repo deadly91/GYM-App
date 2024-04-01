@@ -5,6 +5,7 @@ import {
   StyleSheet,
   SafeAreaView,
   TouchableOpacity,
+  ScrollView,
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { doc, getDoc, setDoc } from "firebase/firestore"; // Import Firestore functions
@@ -48,6 +49,7 @@ const ClassDetails = ({ route }) => {
   };
 
   return (
+    <ScrollView style={{ flex: 1, backgroundColor: '#355C7D' }}>
     <SafeAreaView style={styles.container}>
       <View style={styles.detailsContainer}>
         <Text style={styles.title}>{selectedClass.name}</Text>
@@ -66,6 +68,7 @@ const ClassDetails = ({ route }) => {
         </View>
       </TouchableOpacity>
     </SafeAreaView>
+    </ScrollView>
   );
 };
 
@@ -106,7 +109,7 @@ const styles = StyleSheet.create({
     color: "#fff",
   },
   btn: {
-    backgroundColor: "#007aff",
+    backgroundColor: "#C06C84",
     paddingVertical: 12,
     paddingHorizontal: 24,
     borderRadius: 8,
