@@ -65,11 +65,7 @@ const EditProfile = ({ route, navigation }) => {
           />
         </View>
         <View style={styles.inputContainer}>
-<<<<<<< HEAD
-          <Text style={styles.label}>Height (cm):</Text>
-=======
           <Text style={styles.label}>Height (m):</Text>
->>>>>>> 83776171a896a52ce1c55ac6fb8d3369f261fa46
           <TextInput
             style={styles.input}
             keyboardType="numeric"
@@ -106,11 +102,7 @@ const EditProfile = ({ route, navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-<<<<<<< HEAD
-    backgroundColor: "#f0f0f0",
-=======
     backgroundColor: "#355C7D",
->>>>>>> 83776171a896a52ce1c55ac6fb8d3369f261fa46
     justifyContent: "center",
     alignItems: "center",
   },
@@ -136,10 +128,6 @@ const styles = StyleSheet.create({
     marginRight: 10,
     color: "#FFFFFF",
   },
-  label: {
-    minWidth: 100,
-    marginRight: 10,
-  },
   input: {
     flex: 1,
     height: 40,
@@ -155,10 +143,7 @@ const styles = StyleSheet.create({
     width: "80%",
     paddingHorizontal: 16,
     marginTop: 16,
-<<<<<<< HEAD
-=======
     color: "#FFFFFF",
->>>>>>> 83776171a896a52ce1c55ac6fb8d3369f261fa46
   },
   button: {
     width: "48%",

@@ -52,17 +52,10 @@ const InputProfile = ({ route, navigation }) => {
           />
         </View>
         <View style={styles.inputContainer}>
-<<<<<<< HEAD
-          <Text style={styles.label}>Height (cm):</Text>
-          <TextInput
-            style={styles.input}
-            placeholder="Enter height (cm)"
-=======
           <Text style={styles.label}>Height (M):</Text>
           <TextInput
             style={styles.input}
             placeholder="Enter height (M)"
->>>>>>> 83776171a896a52ce1c55ac6fb8d3369f261fa46
             keyboardType="numeric"
             value={height}
             onChangeText={(text) => setHeight(text)}
@@ -94,11 +87,7 @@ const InputProfile = ({ route, navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-<<<<<<< HEAD
-    backgroundColor: "#f0f0f0",
-=======
     backgroundColor: "#355C7D",
->>>>>>> 83776171a896a52ce1c55ac6fb8d3369f261fa46
     justifyContent: "center",
     alignItems: "center",
   },
@@ -123,25 +112,13 @@ const styles = StyleSheet.create({
     marginRight: 10,
     color: "#FFFFFF"
   },
-  inputContainer: {
-    flexDirection: "row",
-    alignItems: "center",
-    marginVertical: 8,
-  },
-  label: {
-    minWidth: 100,
-    marginRight: 10,
-  },
   input: {
     flex: 1,
     height: 40,
     borderColor: "gray",
     borderWidth: 1,
     paddingHorizontal: 8,
-<<<<<<< HEAD
-=======
     backgroundColor: "#FFFFFF",
->>>>>>> 83776171a896a52ce1c55ac6fb8d3369f261fa46
   },
   buttonContainer: {
     flexDirection: "row",

@@ -91,11 +91,7 @@ const MyProfile = () => {
         {weight !== null && height !== null && bmi !== null && age !== null ? (
           <View style={styles.profileInfoContainer}>
             <Text style={styles.infoText}>Weight: {weight} kg</Text>
-<<<<<<< HEAD
-            <Text style={styles.infoText}>Height: {height} cm</Text>
-=======
             <Text style={styles.infoText}>Height: {height} M</Text>
->>>>>>> 83776171a896a52ce1c55ac6fb8d3369f261fa46
             <Text style={styles.infoText}>Age: {age}</Text>
             <Text style={styles.infoText}>BMI: {bmi}</Text>
             <Text style={styles.infoText}>BMI Status: {bmiStatus}</Text>
